@@ -36,11 +36,11 @@ class Alieninvasion:
         alien = Alien(self)
         alien_width, alien_height = alien.rect.size
         available_space_x = self.settings.screen_width - (alien_width)
-        number_aliens_x = available_space_x // (2 * alien_width)
+        number_aliens_x = available_space_x // (alien_width)
 
         #determine the number of rows of aliens that fit on the screen
         ship_height = self.ship.rect.height
-        available_space_y = (self.settings.screen_height - (2 * alien_height) - ship_height)
+        available_space_y = (self.settings.screen_height - (alien_height) - ship_height)
         number_rows = available_space_y // (2 * alien_height)
 
         # create the full fleet of aliens.
@@ -52,9 +52,9 @@ class Alieninvasion:
         # create an alien and place it in the raw.
         alien = Alien(self)
         alien_width, alien_height = alien.rect.size
-        alien.x = alien_width + 1.5 * alien_width * alien_number
+        alien.x = alien_width + 1.0 * alien_width * alien_number
         alien.rect.x = alien.x
-        alien.rect.y = alien.rect.height + 1.5 * alien.rect.height * row_number
+        alien.rect.y = alien.rect.height + 1.0 * alien.rect.height * row_number
         self.aliens.add(alien)
         
     def run_game(self):
@@ -79,6 +79,10 @@ class Alieninvasion:
         #update position of the bullets and get rid of old bullets.
         #update bullet position
             self.bullets.update()
+            if not self.aliens:
+                # destroy existing bullets and create new fleet.
+                self.bullets.empty()
+                self._create_fleet()
             
             #get rid of bullets that have disappeared
             for bullet in self.bullets.copy():
