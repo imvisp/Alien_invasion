@@ -90,6 +90,12 @@ class Alieninvasion:
                     self.bullets.remove(bullet)
             print(len(self.bullets))
 
+            self._check_bullet_alien_collisions()
+
+    def _check_bullet_alien_collisions(self):
+        # respond to bullet-alien collision.
+        # remove any bullets and aliens that have collied.
+
             self._update_screen()
             #watch for keyboard and mouse event
 
