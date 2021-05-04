@@ -23,5 +23,6 @@ class settings:
 
         # ship settings
         self.ship_speed = 5  
+        self.ship_limit = 3
                
         
