@@ -101,6 +101,7 @@ class Alieninvasion:
             for aliens in collisions.values():
                 self.stats.score += self.settings.alien_points * len(aliens)
             self.sb.prep_score()
+            self.sb.check_high_score
    
     def _update_bullets(self):
         #update position of the bullets and get rid of old bullets.
@@ -126,6 +127,10 @@ class Alieninvasion:
                 self._update_screen()
             #watch for keyboard and mouse event
 
+                # increase level.
+                self.stats.level += 1
+                self.sb.prep_level()
+
     def check_event(self):
         #respond to keypresses and mouse event
         for event in pygame.event.get():
@@ -148,6 +153,7 @@ class Alieninvasion:
             self.stats.reset_stats()
             self.stats.game_active = True 
             self.sb.prep_score()
+            self.sb.prep_level()
    
             # get rid of any remaining aliens and bullets.
             self.aliens.empty()
